@@ -8,7 +8,9 @@ namespace Basic3DExample
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-
+        Triangle triangle;
+        Quad quad;
+        Cube cube;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -18,9 +20,11 @@ namespace Basic3DExample
 
         protected override void Initialize()
         {
+            cube = new Cube(this);
             // TODO: Add your initialization logic here
-
+            triangle = new Triangle(this);
             base.Initialize();
+            quad = new Quad(this);
         }
 
         protected override void LoadContent()
@@ -34,7 +38,8 @@ namespace Basic3DExample
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
+            cube.Update(gameTime);
+            triangle.Update(gameTime);
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -43,9 +48,10 @@ namespace Basic3DExample
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
+            triangle.Draw();
             // TODO: Add your drawing code here
-
+            quad.Draw();
+            cube.Draw();
             base.Draw(gameTime);
         }
     }
